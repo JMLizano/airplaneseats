@@ -13,11 +13,17 @@ Following this, the strategy used is very simple, a sort-of greedy algorithm wer
 For example given the following list of customers:
 
 1W 2 3
+
 4 5 6 7
+
 8
+
 9 10 11W
+
 12W
+
 13 14
+
 15 16
 
 the first group to be allocated would be (4,5,6,7) then one of [(1,2,3), (9,10,11)] and so on.
