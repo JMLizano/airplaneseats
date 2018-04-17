@@ -17,8 +17,14 @@ trait SittingArrangement {
 
   val planeRows: Int
   val rowSeats: Int
+  /* planeSeats represents the free seats in the plane
+      1 -> Seat is free
+      0 -> Seat is occupied
+   */
   lazy val planeSeats : Array[Array[Int]] = Array.fill(planeRows)(Array.fill(rowSeats)(1))
+  // finalSeats represents the final passenger arrangement in the plane
   lazy val finalSeats : Array[Array[String]] = Array.fill(planeRows)(Array.fill(rowSeats)(""))
+  // waitingPassengers are passengers that do not fill in the plane due to oversubscribing
   var waitingPassengers : Array[Passenger] = Array()
   val passengers: List[PassengerGroup]
 }

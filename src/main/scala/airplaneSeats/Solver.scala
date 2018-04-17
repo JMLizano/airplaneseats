@@ -2,6 +2,11 @@ package airplaneSeats
 
 trait Solver extends  SittingArrangement {
 
+  /**
+  * Find rows where the group fits, and orders them by window seats available.
+  * Rows with fewer window seats are fist in the array, so groups with no window preference
+  * pick the first row in the array and vice versa
+  */
   def findRow(groupSize: Int, windowPreference: Boolean) : Int = {
     val seatsWithIndex = planeSeats.zipWithIndex
     // Get only rows with enough space, and sort them by available window seats
@@ -12,6 +17,11 @@ trait Solver extends  SittingArrangement {
       validRows.head._2
   }
 
+  /**
+    * Given a row, finds column from which start sitting the group (always assign seats from left to right)
+    * If group has no window preference always start from first free seat, otherwhise look if there are
+    * free windows seats.
+    */
   def findCol(row: Int, groupSize: Int, windowPreference: Boolean) : Int = {
     if (windowPreference)
       planeSeats(row) match {
@@ -21,6 +31,7 @@ trait Solver extends  SittingArrangement {
     else
       planeSeats(row).indexWhere(_ == 1)
   }
+
 
   def getSeats(passengers: List[Passenger]) = {
     val groupWindowPreference = passengers.count(_.windowPreference) > 0
@@ -35,7 +46,10 @@ trait Solver extends  SittingArrangement {
     }
   }
 
-
+  /**
+    * If there is enough space in any row for the group go ahead. Otherwise split the group,
+    * making subgroups as large as possible
+    */
   def placeGroup(group: PassengerGroup) : Unit = {
     val maxFreeSeats = planeSeats.map(_.sum).max
     if (maxFreeSeats == 0)

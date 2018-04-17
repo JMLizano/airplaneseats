@@ -1,8 +1,6 @@
 package airplaneSeats
 
-import scala.io.{BufferedSource, Source}
-import java.io.{FileNotFoundException, IOException}
-
+import scala.io.Source
 
 trait FileParser extends SittingArrangement {
 
